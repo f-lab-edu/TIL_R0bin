@@ -1,0 +1,208 @@
+상속이란?
+public class Child extends Parents
+- Parents 클래스를 확장한다.
+
+부모 클래스에 선언되어 있는 public 및 protected로 선언되어 있는 변수와 메소드를 내가 갖고 있는 것처럼 사용할 수 있다.
+
+extends 클래스명 => 해당 클래스를 상속 받는 다는 것을 의미한다.
+
+public class Parent {
+    public Parent(){
+        System.out.println("Parent constructor");
+    }
+    public void printName( ){
+        System.out.println("Parent printName()");
+    }
+}
+public class Child extends Parent {
+    public Child() {
+        System.out.println("Child constructor");
+    }
+}
+public class InheritancePrint {
+    public static void main(String[] args) {
+        Child child = new Child();
+        child.printName();
+    }
+}
+
+결과 
+
+Parent constructor
+Child constructor
+Parent printName()
+
+
+-  확장을 한 클래스가 생성자를 호출하면, 자동으로 부모 클래스의 기본 생성자가 호출된다.
+
+-  그 다음 자식 클래스의 생성자에 있는 내용들이 수행된다.
+
+-  부모 클래스에만 있는 printName() 메소드가 실행 됨.
+
+-  자식 클래스는 부모 클래스에 있는 public, protected로 선언된 모든 인스턴스 및 클래스 변수와 메소드를 사용할 수 있다.
+
+
+
+부모 클래스에서는 기본 생성자를 만들어 놓는 것 이외에는 상속을 위해 아무런 작업을 할 필요가 없다.
+
+하나의 클래스를 잘 만들어 놓은게 있으면, 그 클래스를 상속받아 추가적인 기능을 사용할 수 있다.
+
+
+
+Super()
+매개 변수가 있는 생성자를 만들었을 경우 기본 생성자는 만들어지지 않는다.
+
+
+
+해결책
+
+: 부모 클래스에 "매개 변수가 없는" 기본 생성자를 만든다.
+
+ 자식 클래스에서 부모 클래스의 생성자를 일시적으로 명시하는 super() 를 사용한다.
+
+
+
+super()을 사용하게 되면 부모클래스의 생성자를 호출한다는 것을 의미한다.
+
+ex) super.printName() -> 부모 클래스에 있는 printName() 이라는 메소드를 호출한다는 의미.
+
+
+
+자식클래스의 생성자에서  super()을 명시적으로 지정하지 않으면, 컴파일시 자동으로 super()가 추가된다.
+
+
+
+부모클래스의 생성자를 호출하는 super()은 반드시 자식 클래스의 생성자에서 가장 첫줄에 선언해야한다.
+
+
+
+
+
+Overriding
+overriding : "다른 무엇보다 중요한, 최우선시 되는" 
+
+
+
+자식 클래스에서 부모 클래스에 있는 메소드와 동일하게 선언하는 것
+
+(접근 제어자, 리턴 타입, 메소드 이름, 매개변수 타입 및 개수가 모두 동일해야함 -> 동일한 시그니처를 가진다)
+
+
+
+상속관계를 보다 유연하게 활용하기 위한 메소드
+
+
+
+부모 클래스에 선언되어 있는 메소드를 자식 클래스에 선언하면 자식 클래스의  메소드만 실행된다.
+
+
+
+Overriding 된 메소드는 부모클래스와 동일한 리턴 타입을 가져야만 한다.﻿
+
+Overriding 된 메소드의 접근 제어자는 부모 클래스에 있는 메소드와 달라도 되지만, 접근 권한이 확장되는 경우에만 허용된다. 
+접근 권한이 축소될 경우에는 컴파일 에러가 발생한다.
+
+
+
+참조 자료형의 형 변환
+기존 객체 생성 방식
+
+ParentCasting parent = new ParentCasting();
+
+ChildCasting child = new ChildCasting();
+
+ 
+
+상속 관계가 성립되면 아래와 같이 객체를 생성 할 수 있음
+
+ParentCasting obj = new ChildCasting();
+
+ 
+
+하지만 아래와 같이 생성할 수는 없음
+
+ChildCasting obj2 = new ParentCasting();
+
+ 
+
+자식 클래스인 ChildCasting 에서는 부모 클래스인 ParentCasting 클래스에 있는 메소드와 변수들을 사용 할 수 있음.
+
+But 부모 클래스인 ParentCasting 클래스에서는 ChildCasting 클래스에 있는 모든 메소드와 변수들을 사용할 수 없다.
+
+ 
+
+부연 )
+
+참조 자료형은 자식 클래스의 타입을 부모 클래스의 타입으로 형 변환하면 부모 클래스에서 호출할 수 있는 메소드들은 자식 클래스에서도 호출할 수 있으므로 전혀 문제가 되지 않음 => 형 변환을 명시적으로 해줄 필요가 없다.
+
+하지만  parent 객체는 ParentCasting 클래스의 객체이며, ChildCasting 클래에 선언되어 있는 메소드나 변수를 완전히 사용할 수 없기에 아래와 같이 형 변환을 해야만한다.
+
+ ChildCasting child2 = (ChildCasting) parent;
+->  parent 객체는 실제로 ParentCasting 클래스의 객체이므로 컴파일 오류는 넘겼지만, 실행시에는 원래 ParentCasting 객체라서 사용하지못함.  (예외 발생)
+
+ 
+
+ParentCasting parent2 = child;
+ChildCasting child2 = (ChildCasting) parent2;
+ -> parent2는 child를 대입한 것이다. (child 는 ChildCasting 클래스의 객체이다) 
+
+따라서  parent2를 ChildCasting 클래스로 형 변환해도 문제가 생기지 않는다.
+
+ 
+
+Instanceof
+타입을 구분하는 예약어
+
+public class InheritanceCasting {
+    public static void main(String args[]) {
+        InheritanceCasting inheritance = new InheritanceCasting();
+        inheritance.objectCastArray();
+    }
+    public void objectCastArray() {
+        ParentCasting[] parentArray = new ParentCasting[3];
+        parentArray[0] = new ChildCasting();
+        parentArray[1] = new ParentCasting();
+        parentArray[2] = new ChildCasting();
+    }
+}
+이럴 때 parentArray 배열 요소의 타입이 ParentCasting인지 ChildCasting인지 어떻게 구분할 수 있을까?
+
+public class InheritanceCasting {
+    public static void main(String args[]) {
+        InheritanceCasting inheritance = new InheritanceCasting();
+        inheritance.objectCastArray();
+    }
+    public void objectCastArray() {
+        ParentCasting[] parentArray = new ParentCasting[3];
+        parentArray[0] = new ChildCasting();
+        parentArray[1] = new ParentCasting();
+        parentArray[2] = new ChildCasting();
+        objectTypeCheck(parentArray);
+    }
+    private void objectTypeCheck(ParentCasting[] parentArray) {
+        for(ParentCasting tempParent:parentArray) {
+            if(tempParent instanceof ChildCasting) {
+                System.out.println("ChildCasting");
+                ChildCasting tempChild = (ChildCasting)tempParent;
+                tempChild.printAge();
+            } else if(tempParent instanceof ParentCasting) {
+                System.out.println("ParentCasting");
+            }
+        }
+    }
+}
+/* 결과
+ChildCasting  
+printAge() - 18 month  
+ParentCasting  
+ChildCasting  
+printAge() - 18 month
+*/
+이럴 때 instanceof라는 예약어를 사용하여 구분하면 된다. (객체 instanceof 클래스타입)
+이와 같이 instanceof로 타입을 확인한 후 명시적으로 형 변환하면 ChildCasting에만 선언되어 있는 메소드를 호출 가능하다.
+
+하지만 여기서 한 가지 주의할 점이 있다.
+
+System.out.println(parentArray[0] instanceof ParentCasting);
+parentArray[0]은 ChildCasting 객체이지만 ParentCasting을 상속받기 때문에 이 결과는 true이다.
+그래서 instanceof를 사용하여 타입을 점검할 때는 가장 하위에 있는 자식 타입부터 확인을 해야 제대로 타입 점검이 가능하다.
