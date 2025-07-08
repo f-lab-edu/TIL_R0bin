@@ -1,4 +1,4 @@
-상속이란?
+#상속이란?
 public class Child extends Parents
 - Parents 클래스를 확장한다.
 
@@ -49,7 +49,7 @@ Parent printName()
 
 
 
-Super()
+##Super()
 매개 변수가 있는 생성자를 만들었을 경우 기본 생성자는 만들어지지 않는다.
 
 
@@ -78,7 +78,7 @@ ex) super.printName() -> 부모 클래스에 있는 printName() 이라는 메소
 
 
 
-Overriding
+##Overriding
 overriding : "다른 무엇보다 중요한, 최우선시 되는" 
 
 
@@ -150,7 +150,7 @@ ChildCasting child2 = (ChildCasting) parent2;
 
  
 
-Instanceof
+##Instanceof
 타입을 구분하는 예약어
 
 public class InheritanceCasting {
